@@ -17,12 +17,18 @@
     <div class="input">
       <!--Excelデータテキストエリア-->
       <p>■Excelデータ<br>
-      <textarea id="excelData" rows="15" cols="70"></textarea></p> 
+      <textarea id="excelData" rows="15" cols="70" onblur="inputRequiredCheck();"></textarea></p> 
 
       <!--読み込みボタン-->
-      <input type="button" id="load" value="読み込み" onclick="loadTable();">
+      <input type="button" id="load" value="読み込み" onclick="getHeaderData();" disabled>
 
-
+      <!--ソート順コンボボックス-->
+      <p>■ソート順<br>     
+        <select id="sortOrder" onchange="checkTemplate();" disabled>
+        <option value="null"></option>
+        <option value="reception">受付</option>
+        <option value="password">パスワード通知</option>
+        </select></p>
 
     </div>
   </body>
