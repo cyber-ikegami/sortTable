@@ -1,7 +1,10 @@
-.title {
+  .title {
     background-color: #ffd6b4
   }
   .input{
     background-color: #fdffe0
+  }
+  .result{
+    background-color: #ddffff
   }
   
