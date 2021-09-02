@@ -55,14 +55,23 @@ function outputResult() {
     let outputValue = '';
 
     if(selectValue == 'null'){
-        outputValue = '選択されているのは空白です';
+        outputValue = excelDataValue;
     } else {
-        for(let i = 1; i < dataList.length; i++){
-            outputValue = outputValue + dataList[i][selectValue];
-            if(i != (dataList.length - 1)){
-                outputValue = outputValue + ',';
-            }   
-        }
+        // とりあえず固定
+        dataList.sort(function(a, b){return(a[0] - b[0]);});
+
+        for(let i = 0; i < dataList.length; i++){
+            for(let j = 0; j < dataList[0].length; j++){
+                if(j != (dataList[0].length - 1)){
+                    dataList[i][j].replace(',', '改行');
+                } else {
+                    dataList[i][j].replace(',', 'タブ');
+                }  
+            }
+        } 
+        outputValue = dataList;
     }
-    alert(outputValue)
+    resultForm.resultTextArea.value = outputValue;
+    // 確認用
+    // alert(dataList.length)
 }
