@@ -19,29 +19,8 @@ function getHeaderData(){
     
     // メモ：コンボボックスのリセットがしたい
     for(let j = 0; j < length; j++){
-        sortOrder.remove(i);
+        sortOrder.remove(j);
     }
-    
-
-    // while(sortOrder.lastChild){
-    //     if(!document.getElementById('null')){
-    //         sortOrder.removeChild(lastChild);
-    //     }
-    // }
-
-    // for(let i = length; length > 0; i--){
-    //    sortOrder.remove(i);
-    // }
-
-    //while(length > 0){ }
-
-    // while(!sortOrder.lastChild == document.getElementById('null')){ }
-
-    // while(sortOrder.lastChild){
-    //    if(!document.getElementById('null')){
-    //        sortOrder.removeChild(lastChild);
-    //     }
-    // }
 
 	const excelData = document.getElementById('excelData').value;
     const recordList = excelData.split(/\n/g);
