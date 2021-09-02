@@ -17,16 +17,25 @@
     <div class="input">
       <!--Excelデータテキストエリア-->
       <p>■Excelデータ<br>
-      <textarea id="excelData" rows="15" cols="70" onblur="inputRequiredCheck();"></textarea></p> 
+      <textarea id="excelData" rows="15" cols="70" onblur="inputRequiredCheck();"></textarea> 
 
       <!--読み込みボタン-->
-      <input type="button" id="load" value="読み込み" onclick="getHeaderData();" disabled>
+      <input type="button" id="load" value="読み込み" onclick="getHeaderData();" disabled></p>
 
       <!--ソート順コンボボックス-->
       <p>■ソート順<br>     
         <select id="sortOrder" name="sortOrder" disabled></select>
-      </p>
 
+      <!--ソート実行ボタン-->
+      <input type="button" id="execution" value="ソート実行" onclick="outputResult();" disabled></p>
+    </div>
+
+    <!--出力結果テキストエリア-->
+    <div class="result">
+        <p>【出力結果】</p>
+        <form name="resultForm">
+          <textarea rows="15" cols="70" id="result" name="resultTextArea" disabled></textarea>
+        </form>
     </div>
   </body>
 </html>
