@@ -14,17 +14,19 @@ function inputRequiredCheck() {
 // ヘッダーの値を取得し、ソート順コンボボックスに出力
 function getHeaderData(){
     const sortOrder = document.getElementById('sortOrder');
-    const length = sortOrder.childNodes.length;
     sortOrder.disabled = false;
     
-    // メモ：コンボボックスのリセットがしたい
-    for(let j = 0; j < length; j++){
-        sortOrder.remove(j);
-    }
+    // コンボボックス初期化
+    sortOrder.innerHTML = "";
 
 	const excelData = document.getElementById('excelData').value;
     const recordList = excelData.split(/\n/g);
     let headerList = recordList[0].split(/[,\t]/g);
+
+    let option = document.createElement("option");
+    option.text = '';
+    option.value = 'null';
+    sortOrder.appendChild(option);
     
     for(let i = 0; i < headerList.length; i++){
         let option = document.createElement("option");
