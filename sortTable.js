@@ -63,18 +63,14 @@ function outputResult() {
     const selectValue = document.getElementById('sortOrder').value;
     let outputValue = '';
     
-    if(selectValue == 'null'){
-        result.disabled = true;
-        outputValue = excelDataValue;
-    } else {
-        result.disabled = false;
+    result.disabled = false;
 
-        dataList.sort (function(a, b) {
-            return(a[selectValue] - b[selectValue]);
-        });
+    dataList.sort (function(a, b) {
+        return(a[selectValue] - b[selectValue]);
+    });
         
-        let val = dataList.join('\n');
-        outputValue = val.replace(/,/g, '\t');
-    }
+    let val = dataList.join('\n');
+    outputValue = val.replace(/,/g, '\t');
+
     resultForm.resultTextArea.value = outputValue;
 }
