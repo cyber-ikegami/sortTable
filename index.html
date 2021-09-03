@@ -14,27 +14,27 @@
       <p>読み込んだ表を、選択した値でソートできます。</p>
     </div>
 
-    <div class="input">
+    <div class="input" id="inputDiv">
       <!--Excelデータテキストエリア-->
       <p>■Excelデータ<br>
       <textarea id="excelData" rows="15" cols="70" onblur="inputRequiredCheck();"></textarea> 
 
       <!--読み込みボタン-->
       <input type="button" id="load" value="読み込み" onclick="getHeaderData();" disabled></p>
-
-      <!--ソート順コンボボックス-->
-      <p>■ソート順<br>     
-        <select id="sortOrder" name="sortOrder" onchange="getSelectComboBox();" disabled></select>
-
-      <!--ソート実行ボタン-->
-      <input type="button" id="execution" value="ソート実行" onclick="outputResult();" disabled></p>
     </div>
-
-    <!--出力結果テキストエリア-->
-    <div class="result">
+    
+    <div class="result disabled" id="resultDiv">        
+        <!--ソート順コンボボックス-->
+        <p>■ソート順<br>     
+        <select id="sortOrder" name="sortOrder" onchange="getSelectComboBox();"></select>
+            
+        <!--ソート実行ボタン-->
+        <input type="button" id="execution" value="ソート実行" onclick="outputResult();" disabled></p>
+            
+        <!--出力結果テキストエリア-->
         <p>【出力結果】</p>
         <form name="resultForm">
-          <textarea rows="15" cols="70" id="result" name="resultTextArea" disabled></textarea>
+            <textarea rows="15" cols="70" id="result" name="resultTextArea" disabled></textarea>
         </form>
     </div>
   </body>
