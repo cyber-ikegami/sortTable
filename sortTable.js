@@ -1,3 +1,17 @@
+// コンボボックス追加
+function AddcomboBox(){
+    const SORT_NUM = 3;
+    for(let i = 0; i < SORT_NUM; i++){
+        const selectDiv = document.getElementById("sortOrder");
+        const select = document.createElement("select");
+        let option = document.createElement("option");
+        option.text = '';
+        option.value = 'null';
+        sortOrder.appendChild(option);
+        selectDiv.appendChild(select);
+    }
+}
+
 // 入力必須チェック
 function inputRequiredCheck() {
 	const excelData = document.getElementById("excelData");
