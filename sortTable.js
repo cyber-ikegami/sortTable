@@ -14,22 +14,21 @@ function inputRequiredCheck() {
 // ヘッダーの値を取得し、ソート順コンボボックスに出力
 function getHeaderData(){
     const sortOrder = document.getElementById('sortOrder');
-    const execution = document.getElementById('execution');
     sortOrder.disabled = false;
-    execution.disabled = false;
     
     // コンボボックス初期化
     sortOrder.innerHTML = "";
-
+    
 	const excelDataValue = document.getElementById('excelData').value;
     const recordList = excelDataValue.split(/\n/g);
     let headerList = recordList[0].split(/[,\t]/g);
-
+    
     let option = document.createElement("option");
     option.text = '';
     option.value = 'null';
     sortOrder.appendChild(option);
     
+    // コンボボックス選択肢追加
     for(let i = 0; i < headerList.length; i++){
         let option = document.createElement('option');
         option.text = headerList[i];
@@ -38,40 +37,44 @@ function getHeaderData(){
     }
 }
 
+// コンボボックス選択時
+// null選択時はソート実行ボタン非活性
+function getSelectComboBox(){
+    const execution = document.getElementById('execution');
+
+    if(sortOrder.value == 'null'){
+        execution.disabled = true;
+    } else if(sortOrder.value != 'null'){
+        execution.disabled = false;
+    }
+}
+
 // ソート実行ボタン押下時動作
-// 選択中の項目のvalue（インデックス）をアラートで出す
 function outputResult() {
     const result = document.getElementById('result');
-    result.disabled = false;
-
+    
     const excelDataValue = document.getElementById('excelData').value;
     let recordList = excelDataValue.split(/\n/g);
     let dataList = [];
     for(let i = 0; i < recordList.length; i++){
         dataList[i] = recordList[i].split(/[,\t]/g);
     }
-
+    
     const selectValue = document.getElementById('sortOrder').value;
     let outputValue = '';
-
+    
     if(selectValue == 'null'){
+        result.disabled = true;
         outputValue = excelDataValue;
     } else {
-        // とりあえず固定
-        dataList.sort(function(a, b){return(a[0] - b[0]);});
+        result.disabled = false;
 
-        for(let i = 0; i < dataList.length; i++){
-            for(let j = 0; j < dataList[0].length; j++){
-                if(j != (dataList[0].length - 1)){
-                    dataList[i][j].replace(',', '改行');
-                } else {
-                    dataList[i][j].replace(',', 'タブ');
-                }  
-            }
-        } 
-        outputValue = dataList;
+        dataList.sort (function(a, b) {
+            return(a[selectValue] - b[selectValue]);
+        });
+        
+        let val = dataList.join('\n');
+        outputValue = val.replace(/,/g, '\t');
     }
     resultForm.resultTextArea.value = outputValue;
-    // 確認用
-    // alert(dataList.length)
 }
