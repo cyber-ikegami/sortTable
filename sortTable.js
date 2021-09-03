@@ -3,11 +3,7 @@ function inputRequiredCheck() {
 	const excelData = document.getElementById("excelData");
 	const load = document.getElementById("load");
 
-    if(excelData.value == ""){
-        load.disabled = true;
-    } else {
-        load.disabled = false;
-    }
+    load.disabled = (excelData.value == "");
 }
 
 // 読み込みボタン押下時動作
@@ -45,12 +41,7 @@ function getHeaderData(){
 // null選択時はソート実行ボタン非活性
 function getSelectComboBox(){
     const execution = document.getElementById('execution');
-
-    if(sortOrder.value == 'null'){
-        execution.disabled = true;
-    } else if(sortOrder.value != 'null'){
-        execution.disabled = false;
-    }
+    execution.disabled = (sortOrder.value == 'null');
 }
 
 // ソート実行ボタン押下時動作
