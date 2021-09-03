@@ -1,10 +1,14 @@
   .title {
-    background-color: #ffd6b4
+    background-color: #ffd6b4;
   }
   .input{
-    background-color: #fdffe0
+    background-color: #fdffe0;
   }
   .result{
-    background-color: #ddffff
+    background-color: #ddffff;
   }
   
+  .disabled{
+    opacity: 0.5;
+    pointer-events: none;
+  }

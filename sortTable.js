@@ -13,9 +13,13 @@ function inputRequiredCheck() {
 // 読み込みボタン押下時動作
 // ヘッダーの値を取得し、ソート順コンボボックスに出力
 function getHeaderData(){
-    const sortOrder = document.getElementById('sortOrder');
-    sortOrder.disabled = false;
-    
+    const inputDiv = document.getElementById("inputDiv");
+    const resultDiv = document.getElementById("resultDiv");
+    const sortOrder = document.getElementById("sortOrder");
+
+    inputDiv.classList.add("disabled");
+    resultDiv.classList.remove("disabled");
+
     // コンボボックス初期化
     sortOrder.innerHTML = "";
     
@@ -52,6 +56,7 @@ function getSelectComboBox(){
 // ソート実行ボタン押下時動作
 function outputResult() {
     const result = document.getElementById('result');
+    result.disabled = false;
     
     const excelDataValue = document.getElementById('excelData').value;
     let recordList = excelDataValue.split(/\n/g);
@@ -63,8 +68,6 @@ function outputResult() {
     const selectValue = document.getElementById('sortOrder').value;
     let outputValue = '';
     
-    result.disabled = false;
-
     dataList.sort (function(a, b) {
         return(a[selectValue] - b[selectValue]);
     });
