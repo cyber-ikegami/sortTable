@@ -4,12 +4,16 @@ function AddcomboBox(){
     for(let i = 0; i < SORT_NUM; i++){
         const selectDiv = document.getElementById("sortOrder");
         const select = document.createElement("select");
-        let option = document.createElement("option");
+        let option = document.createElement("option"); 
+        
+        // コンボボックスの幅の指定
+        selectDiv.classList.add("width");
+        
         option.text = '';
         option.value = 'null';
-        sortOrder.appendChild(option);
         selectDiv.appendChild(select);
     }
+    sortOrder.appendChild(option);
 }
 
 // 入力必須チェック
