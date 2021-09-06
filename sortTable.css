@@ -10,10 +10,14 @@
   
   /* コンボボックスの幅の指定 */
   .width{
-      width: 200px;
+    width: 200px;
   }
 
   .disabled{
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  .inline{
+    display: inline;
   }
