@@ -1,19 +1,13 @@
 // コンボボックス追加
 function AddcomboBox(){
     const SORT_NUM = 3;
+    let option = document.createElement("option"); 
     for(let i = 0; i < SORT_NUM; i++){
         const selectDiv = document.getElementById("sortOrder");
         const select = document.createElement("select");
-        let option = document.createElement("option"); 
-        
-        // コンボボックスの幅の指定
         select.classList.add("width");
-        
-        option.text = '';
-        option.value = 'null';
         selectDiv.appendChild(select);
     }
-    sortOrder.appendChild(option);
 }
 
 // 入力必須チェック
