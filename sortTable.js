@@ -7,7 +7,7 @@ function AddcomboBox(){
         let option = document.createElement("option"); 
         
         // コンボボックスの幅の指定
-        selectDiv.classList.add("width");
+        select.classList.add("width");
         
         option.text = '';
         option.value = 'null';

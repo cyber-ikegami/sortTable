@@ -10,7 +10,7 @@
   
   /* コンボボックスの幅の指定 */
   .width{
-    width: 200px;
+    width: 100px;
   }
 
   .disabled{
@@ -18,6 +18,6 @@
     pointer-events: none;
   }
 
-  .inline{
+ .inline{
     display: inline;
   }
