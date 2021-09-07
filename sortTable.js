@@ -7,7 +7,14 @@ function AddcomboBox(){
         const select = document.createElement("select");
         select.classList.add("width");
         selectDiv.appendChild(select);
-        select.setAttribute("id",i);
+        select.setAttribute("id", i);
+
+        // 読み込みボタン押下後、1つ目のコンボボックス以外非活性化
+        // memo:初期表示時、活性化しているコンボボックスのみ
+        // 色が濃く(?)表示されている状態なので改善する
+        if(!i == 0){
+            select.setAttribute("disabled", true);
+        }
     }
 }
 
