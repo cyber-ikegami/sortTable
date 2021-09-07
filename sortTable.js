@@ -1,12 +1,13 @@
+const SORT_NUM = 3;
+
 // コンボボックス追加
 function AddcomboBox(){
-    const SORT_NUM = 3;
-    let option = document.createElement("option"); 
     for(let i = 0; i < SORT_NUM; i++){
         const selectDiv = document.getElementById("sortOrder");
         const select = document.createElement("select");
         select.classList.add("width");
         selectDiv.appendChild(select);
+        select.setAttribute("id",i);
     }
 }
 
@@ -21,31 +22,35 @@ function inputRequiredCheck() {
 // 読み込みボタン押下時動作
 // ヘッダーの値を取得し、ソート順コンボボックスに出力
 function getHeaderData(){
+    // 透過処理
     const inputDiv = document.getElementById("inputDiv");
     const resultDiv = document.getElementById("resultDiv");
-    const sortOrder = document.getElementById("sortOrder");
-
     inputDiv.classList.add("disabled");
     resultDiv.classList.remove("disabled");
-
+    
+    // const sortOrder = document.getElementById("sortOrder");
+    
     // コンボボックス初期化
-    sortOrder.innerHTML = "";
+    // sortOrder.innerHTML = "";
     
 	const excelDataValue = document.getElementById('excelData').value;
     const recordList = excelDataValue.split(/\n/g);
     let headerList = recordList[0].split(/[,\t]/g);
     
-    let option = document.createElement("option");
-    option.text = '';
-    option.value = 'null';
-    sortOrder.appendChild(option);
+    for(let i = 0; i < SORT_NUM; i++){
+        const id = document.getElementById(i);
+        let option = document.createElement("option");
+        option.text = '';
+        option.value = 'null';
+        id.appendChild(option);
     
-    // コンボボックス選択肢追加
-    for(let i = 0; i < headerList.length; i++){
-        let option = document.createElement('option');
-        option.text = headerList[i];
-        option.value = i;
-        sortOrder.appendChild(option);
+        // コンボボックス選択肢追加
+        for(let i = 0; i < headerList.length; i++){
+            let option = document.createElement('option');
+            option.text = headerList[i];
+            option.value = i;
+            id.appendChild(option);
+        }
     }
 }
 
