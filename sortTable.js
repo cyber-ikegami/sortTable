@@ -21,7 +21,6 @@ function inputRequiredCheck() {
 }
 
 // 読み込みボタン押下時動作
-// ヘッダーの値を取得し、ソート順コンボボックスに出力
 function getHeaderData(){
     // 透過処理
     const inputDiv = document.getElementById("inputDiv");
@@ -29,12 +28,7 @@ function getHeaderData(){
     inputDiv.classList.add("disabled");
     resultDiv.classList.remove("disabled");
     
-    // const sortOrder = document.getElementById("sortOrder");
-    
-    // コンボボックス初期化
-    // sortOrder.innerHTML = "";
-    
-	const excelDataValue = document.getElementById('excelData').value;
+    const excelDataValue = document.getElementById('excelData').value;
     const recordList = excelDataValue.split(/\n/g);
     let headerList = recordList[0].split(/[,\t]/g);
     
@@ -63,29 +57,28 @@ function getHeaderData(){
 // コンボボックス選択時
 // null選択時はソート実行ボタン非活性
 function getSelectComboBox(){
-    // const execution = document.getElementById('execution');
-    // const lastComboBoxId = document.getElementById(SORT_NUM - 1);
-
+    const execution = document.getElementById('execution');
+    const lastComboBoxId = document.getElementById(SORT_NUM - 1);
+    
     for(let i = 0; i < SORT_NUM; i++){
         const comboBoxId = document.getElementById(i);
-
+        
         // 空白にしたコンボボックス以降のコンボボックスをすべて非活性にする
-        if(comboBoxId.value == 'null'){
-            for(let j = (i + 1); j < SORT_NUM; j++){
-                const nextComboBoxId = document.getElementById(j);
-                nextComboBoxId.disabled = true;
+        for(let j = (i + 1); j < SORT_NUM; j++){
+            const backComboBox = document.getElementById(j);
+            backComboBox.disabled = (comboBoxId.value == 'null');
+            if(backComboBox.disabled){
+                backComboBox.value = "";
             }
         }
-        // 空白じゃなければ活性化
-        // else{
-        //     nextComboBoxId.disabled = false;
-        // }
         
-        // ソート実行ボタン活性化
-        // 一旦コメントアウト
-        // execution.disabled = (lastComboBoxId.value == 'null');
+        execution.disabled = (lastComboBoxId.value == 'null');  
+        // 確認用
+        // alert(lastComboBoxId.value)
     }
 }
+
+
 
 // ソート実行ボタン押下時動作
 function outputResult() {
