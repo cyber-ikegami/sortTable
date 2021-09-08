@@ -63,15 +63,27 @@ function getHeaderData(){
 // コンボボックス選択時
 // null選択時はソート実行ボタン非活性
 function getSelectComboBox(){
-    const execution = document.getElementById('execution');
-    const lastComboBoxId = document.getElementById(SORT_NUM - 1);
+    // const execution = document.getElementById('execution');
+    // const lastComboBoxId = document.getElementById(SORT_NUM - 1);
+
     for(let i = 0; i < SORT_NUM; i++){
         const comboBoxId = document.getElementById(i);
-        const nextComboBoxId = document.getElementById(i + 1);
-        nextComboBoxId.disabled = (comboBoxId.value == 'null' && comboBoxId != SORT_NUM);
-        
-        execution.disabled = (lastComboBoxId.value == 'null');
 
+        // 空白にしたコンボボックス以降のコンボボックスをすべて非活性にする
+        if(comboBoxId.value == 'null'){
+            for(let j = (i + 1); j < SORT_NUM; j++){
+                const nextComboBoxId = document.getElementById(j);
+                nextComboBoxId.disabled = true;
+            }
+        }
+        // 空白じゃなければ活性化
+        // else{
+        //     nextComboBoxId.disabled = false;
+        // }
+        
+        // ソート実行ボタン活性化
+        // 一旦コメントアウト
+        // execution.disabled = (lastComboBoxId.value == 'null');
     }
 }
 
