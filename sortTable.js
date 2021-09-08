@@ -1,3 +1,4 @@
+// コンボボックスの数
 const SORT_NUM = 3;
 
 // コンボボックス追加
@@ -8,13 +9,7 @@ function AddcomboBox(){
         select.classList.add("width");
         selectDiv.appendChild(select);
         select.setAttribute("id", i);
-
-        // 読み込みボタン押下後、1つ目のコンボボックス以外非活性化
-        // memo:初期表示時、活性化しているコンボボックスのみ
-        // 色が濃く(?)表示されている状態なので改善する
-        if(!i == 0){
-            select.setAttribute("disabled", true);
-        }
+        select.setAttribute("onchange", "getSelectComboBox();");
     }
 }
 
@@ -22,7 +17,6 @@ function AddcomboBox(){
 function inputRequiredCheck() {
 	const excelData = document.getElementById("excelData");
 	const load = document.getElementById("load");
-
     load.disabled = (excelData.value == "");
 }
 
@@ -45,18 +39,23 @@ function getHeaderData(){
     let headerList = recordList[0].split(/[,\t]/g);
     
     for(let i = 0; i < SORT_NUM; i++){
-        const id = document.getElementById(i);
+        const comboBoxId = document.getElementById(i);
         let option = document.createElement("option");
         option.text = '';
         option.value = 'null';
-        id.appendChild(option);
-    
+        comboBoxId.appendChild(option);
+        
+        // 1つ目のコンボボックス以外非活性化
+        if(!i == 0){
+            comboBoxId.setAttribute("disabled", true);
+        }
+        
         // コンボボックス選択肢追加
         for(let i = 0; i < headerList.length; i++){
             let option = document.createElement('option');
             option.text = headerList[i];
             option.value = i;
-            id.appendChild(option);
+            comboBoxId.appendChild(option);
         }
     }
 }
@@ -65,7 +64,15 @@ function getHeaderData(){
 // null選択時はソート実行ボタン非活性
 function getSelectComboBox(){
     const execution = document.getElementById('execution');
-    execution.disabled = (sortOrder.value == 'null');
+    const lastComboBoxId = document.getElementById(SORT_NUM - 1);
+    for(let i = 0; i < SORT_NUM; i++){
+        const comboBoxId = document.getElementById(i);
+        const nextComboBoxId = document.getElementById(i + 1);
+        nextComboBoxId.disabled = (comboBoxId.value == 'null' && comboBoxId != SORT_NUM);
+        
+        execution.disabled = (lastComboBoxId.value == 'null');
+
+    }
 }
 
 // ソート実行ボタン押下時動作
