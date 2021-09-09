@@ -60,6 +60,11 @@ function getSelectComboBox(){
     const execution = document.getElementById('execution');
     const lastComboBoxId = document.getElementById(SORT_NUM - 1);
     
+    // 実行ボタン活性化・非活性化
+    execution.disabled = (lastComboBoxId.value == 'null');  
+    // 確認用
+    // alert(lastComboBoxId.value)
+    
     for(let i = 0; i < SORT_NUM; i++){
         const comboBoxId = document.getElementById(i);
         
@@ -71,10 +76,6 @@ function getSelectComboBox(){
                 backComboBox.value = "";
             }
         }
-        
-        execution.disabled = (lastComboBoxId.value == 'null');  
-        // 確認用
-        // alert(lastComboBoxId.value)
     }
 }
 
