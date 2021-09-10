@@ -9,13 +9,13 @@ function AddcomboBox(){
         select.classList.add("width");
         selectDiv.appendChild(select);
         select.setAttribute("id", i);
-        select.setAttribute("onchange", "getSelectComboBox();");
+        select.setAttribute("onchange", "getSelectComboBox(this);");
     }
 }
 
 // 入力必須チェック
 function inputRequiredCheck() {
-	const excelData = document.getElementById("excelData");
+    const excelData = document.getElementById("excelData");
 	const load = document.getElementById("load");
     load.disabled = (excelData.value == "");
 }
@@ -29,7 +29,7 @@ function getHeaderData(){
     resultDiv.classList.remove("disabled");
     
     addOption(0);
-
+    
     // 1つ目のコンボボックス以外非活性化
     for(let j = 1; j < SORT_NUM; j++){
         document.getElementById(j).setAttribute("disabled", true);
@@ -42,17 +42,17 @@ function addOption(id){
     const recordList = excelDataValue.split(/\n/g);
     let headerList = recordList[0].split(/[,\t]/g);
     const comboBoxId = document.getElementById(id);
-
+    
     comboBoxId.remove('');
     for(let i = 0; i < headerList.length; i++){
         comboBoxId.remove(i);
     }
-
+    
     let option = document.createElement("option");
     option.text = '';
     option.value = '';
     comboBoxId.appendChild(option);
-
+    
     for(let i = 0; i < headerList.length; i++){
         let option = document.createElement('option');
         option.text = headerList[i];
@@ -63,14 +63,14 @@ function addOption(id){
 
 // コンボボックス選択時
 // 1つ目のコンボボックスにて空白選択時はソート実行ボタン非活性
-function getSelectComboBox(){
+function getSelectComboBox(obj){
     const execution = document.getElementById('execution');
     const firstComboBoxId = document.getElementById(0);
     
     // 後ほど実装
     // let selectValueArray = new Array;
     
-    for(let i = 0; i < SORT_NUM; i++){
+    for(let i = Number(obj.id); i < SORT_NUM; i++){
         const comboBoxId = document.getElementById(i);
         // 後ほど実装
         // selectValueArray.push(comboBoxId.value);
@@ -90,7 +90,7 @@ function getSelectComboBox(){
     execution.disabled = (firstComboBoxId.value == ''); 
 
     // 確認用
-    // alert(selectValueArray)
+    // alert(this)
 }
 
 
