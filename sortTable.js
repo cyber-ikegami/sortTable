@@ -36,7 +36,7 @@ function getHeaderData(){
         const comboBoxId = document.getElementById(i);
         let option = document.createElement("option");
         option.text = '';
-        option.value = 'null';
+        option.value = '';
         comboBoxId.appendChild(option);
         
         // 1つ目のコンボボックス以外非活性化
@@ -55,15 +55,11 @@ function getHeaderData(){
 }
 
 // コンボボックス選択時
-// null選択時はソート実行ボタン非活性
+// 1つ目のコンボボックスにて空白選択時はソート実行ボタン非活性
 function getSelectComboBox(){
     const execution = document.getElementById('execution');
-    const lastComboBoxId = document.getElementById(SORT_NUM - 1);
-    
-    // 実行ボタン活性化・非活性化
-    execution.disabled = (lastComboBoxId.value == 'null');  
-    // 確認用
-    // alert(lastComboBoxId.value)
+    const farstComboBoxId = document.getElementById(0);
+    // let selectValueArray = new Array;
     
     for(let i = 0; i < SORT_NUM; i++){
         const comboBoxId = document.getElementById(i);
@@ -71,12 +67,16 @@ function getSelectComboBox(){
         // 空白にしたコンボボックス以降のコンボボックスをすべて非活性にする
         for(let j = (i + 1); j < SORT_NUM; j++){
             const backComboBox = document.getElementById(j);
-            backComboBox.disabled = (comboBoxId.value == 'null');
+            backComboBox.disabled = (comboBoxId.value == '');
             if(backComboBox.disabled){
                 backComboBox.value = "";
             }
         }
     }
+    // 実行ボタン活性化・非活性化
+    execution.disabled = (farstComboBoxId.value == ''); 
+    // 確認用
+    // alert(selectValueArray)
 }
 
 
