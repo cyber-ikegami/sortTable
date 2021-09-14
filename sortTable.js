@@ -68,15 +68,18 @@ function getSelectComboBox(obj){
     const firstComboBoxId = document.getElementById(0);
     const comboBoxId = document.getElementById(Number(obj.id));
 
-    let j = Number(obj.id) + 1;
+    let i = Number(obj.id) + 1;
+    const backComboBox = document.getElementById(i);
 
-    if(j < SORT_NUM){
-        const backComboBox = document.getElementById(j);
-        backComboBox.disabled = (comboBoxId.value == '');
+    backComboBox.disabled = (comboBoxId.value == '');
+    if(i < SORT_NUM){
+    // for(let j = i; j < SORT_NUM; j++){
         if(backComboBox.disabled){
+            // コンボボックスを初期化したい
             backComboBox.value = "";
         } else {
-            addOption(j);
+            addOption(i);
+            // addOption(j);
         }
     }
     // 実行ボタン活性化・非活性化
