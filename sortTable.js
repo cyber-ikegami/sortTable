@@ -44,7 +44,8 @@ function addOption(id){
 
     let option = document.createElement("option");
     const comboBoxId = document.getElementById(id);
-    let selectOptionArray = [comboBoxId.value];
+    const selectComboBox = document.getElementById(id - 1);
+    let selectOptionArray = [selectComboBox.value];
 
     // 確認用
     // alert(comboBoxId.value)
