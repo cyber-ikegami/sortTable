@@ -40,15 +40,11 @@ function getHeaderData(){
 function addOption(id){
     const excelDataValue = document.getElementById('excelData').value;
     const recordList = excelDataValue.split(/\n/g);
-    let headerList = recordList[0].split(/[,\t]/g);
     const comboBoxId = document.getElementById(id);
-    
-    comboBoxId.remove('');
-    for(let i = 0; i < headerList.length; i++){
-        comboBoxId.remove(i);
-    }
-    
+    let headerList = recordList[0].split(/[,\t]/g);
     let option = document.createElement("option");
+    
+    comboBoxId.innerHTML = '';
     option.text = '';
     option.value = '';
     comboBoxId.appendChild(option);
@@ -68,18 +64,19 @@ function getSelectComboBox(obj){
     const firstComboBoxId = document.getElementById(0);
     const comboBoxId = document.getElementById(Number(obj.id));
 
-    let i = Number(obj.id) + 1;
-    const backComboBox = document.getElementById(i);
+    for(let i = (Number(obj.id) + 1); i < SORT_NUM; i++) {
+        const backComboBox = document.getElementById(i);
+        
+        // コンボボックス活性化・非活性化
+        backComboBox.disabled = comboBoxId.value == '';
+        if(backComboBox != document.getElementById(Number(obj.id) + 1)){
+            backComboBox.disabled = true;
+        }
 
-    backComboBox.disabled = (comboBoxId.value == '');
-    if(i < SORT_NUM){
-    // for(let j = i; j < SORT_NUM; j++){
         if(backComboBox.disabled){
-            // コンボボックスを初期化したい
-            backComboBox.value = "";
+            backComboBox.innerHTML = '';
         } else {
             addOption(i);
-            // addOption(j);
         }
     }
     // 実行ボタン活性化・非活性化
