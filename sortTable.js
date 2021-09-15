@@ -40,9 +40,14 @@ function getHeaderData(){
 function addOption(id){
     const excelDataValue = document.getElementById('excelData').value;
     const recordList = excelDataValue.split(/\n/g);
-    const comboBoxId = document.getElementById(id);
     let headerList = recordList[0].split(/[,\t]/g);
+
     let option = document.createElement("option");
+    const comboBoxId = document.getElementById(id);
+    let selectOptionArray = [comboBoxId.value];
+
+    // 確認用
+    // alert(comboBoxId.value)
     
     comboBoxId.innerHTML = '';
     option.text = '';
@@ -50,10 +55,12 @@ function addOption(id){
     comboBoxId.appendChild(option);
     
     for(let i = 0; i < headerList.length; i++){
-        let option = document.createElement('option');
-        option.text = headerList[i];
-        option.value = i;
-        comboBoxId.appendChild(option);
+        if(!selectOptionArray.includes(i)){
+            let option = document.createElement('option');
+            option.text = headerList[i];
+            option.value = i;
+            comboBoxId.appendChild(option);
+        }
     }
 }
 
@@ -70,7 +77,7 @@ function getSelectComboBox(obj){
         backComboBox.innerHTML = '';
         backComboBox.disabled = true;
 
-        if(!selectComboBox.value == ''){
+        if(selectComboBox.value != ''){
             nextComboBox.disabled = false;
             addOption(Number(obj.id) + 1);
         }
