@@ -1,5 +1,6 @@
 // コンボボックスの数
 const SORT_NUM = 3;
+let SELECT_OPTION_ARRAY = [];
 
 // コンボボックス追加
 function AddcomboBox(){
@@ -44,8 +45,10 @@ function addOption(id){
 
     let option = document.createElement("option");
     const comboBoxId = document.getElementById(id);
-    const selectComboBox = document.getElementById(id - 1);
-    let selectOptionArray = [selectComboBox.value];
+    if(comboBoxId != 0){
+        const selectComboBox = document.getElementById(id - 1).value;
+        SELECT_OPTION_ARRAY.push(selectComboBox);
+    } 
 
     // 確認用
     // alert(comboBoxId.value)
@@ -56,7 +59,7 @@ function addOption(id){
     comboBoxId.appendChild(option);
     
     for(let i = 0; i < headerList.length; i++){
-        if(!selectOptionArray.includes(i)){
+        if(!SELECT_OPTION_ARRAY.includes(i)){
             let option = document.createElement('option');
             option.text = headerList[i];
             option.value = i;
