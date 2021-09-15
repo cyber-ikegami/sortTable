@@ -61,28 +61,23 @@ function addOption(id){
 // 1つ目のコンボボックスにて空白選択時はソート実行ボタン非活性
 function getSelectComboBox(obj){
     const execution = document.getElementById('execution');
-    const firstComboBoxId = document.getElementById(0);
-    const comboBoxId = document.getElementById(Number(obj.id));
+    const firstComboBox = document.getElementById(0);
+    const selectComboBox = document.getElementById(Number(obj.id));
+    const nextComboBox = document.getElementById(Number(obj.id) + 1);
 
     for(let i = (Number(obj.id) + 1); i < SORT_NUM; i++) {
         const backComboBox = document.getElementById(i);
-        
-        // コンボボックス活性化・非活性化
-        backComboBox.disabled = comboBoxId.value == '';
-        if(backComboBox != document.getElementById(Number(obj.id) + 1)){
-            backComboBox.disabled = true;
-        }
+        backComboBox.innerHTML = '';
+        backComboBox.disabled = true;
 
-        if(backComboBox.disabled){
-            backComboBox.innerHTML = '';
-        } else {
-            addOption(i);
+        if(!selectComboBox.value == ''){
+            nextComboBox.disabled = false;
+            addOption(Number(obj.id) + 1);
         }
     }
     // 実行ボタン活性化・非活性化
-    execution.disabled = (firstComboBoxId.value == ''); 
+    execution.disabled = (firstComboBox.value == ''); 
 }
-
 
 // ソート実行ボタン押下時動作
 function outputResult() {
