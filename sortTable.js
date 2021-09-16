@@ -22,7 +22,6 @@ function inputRequiredCheck() {
 
 // 読み込みボタン押下時動作
 function getHeaderData(){
-    // 透過処理
     const inputDiv = document.getElementById("inputDiv");
     const resultDiv = document.getElementById("resultDiv");
     inputDiv.classList.add("disabled");
@@ -30,7 +29,6 @@ function getHeaderData(){
     
     addOption(0);
     
-    // 1つ目のコンボボックス以外非活性化
     for(let j = 1; j < SORT_NUM; j++){
         document.getElementById(j).setAttribute("disabled", true);
     }
@@ -84,7 +82,6 @@ function getSelectComboBox(obj){
             addOption(Number(obj.id) + 1);
         }
     }
-    // 実行ボタン活性化・非活性化
     execution.disabled = (firstComboBox.value == ''); 
 }
 
@@ -95,18 +92,21 @@ function outputResult() {
     
     const excelDataValue = document.getElementById('excelData').value;
     let recordList = excelDataValue.split(/\n/g);
-    let dataList = [];
+    
+    // 全部
+    let dataList = new Array();
     for(let i = 0; i < recordList.length; i++){
         dataList[i] = recordList[i].split(/[,\t]/g);
     }
-    
-    const selectValue = document.getElementById('sortOrder').value;
-    let outputValue = '';
-    
+
     dataList.sort (function(a, b) {
-        return(a[selectValue] - b[selectValue]);
+        for(let j = 0; j < SORT_NUM; j++){
+            const comboBox = document.getElementById(j).value;
+            return(a[comboBox] - b[comboBox]);
+        }
     });
-        
+
+    let outputValue = '';
     let val = dataList.join('\n');
     outputValue = val.replace(/,/g, '\t');
 
