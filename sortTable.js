@@ -1,6 +1,5 @@
 // コンボボックスの数
 const SORT_NUM = 3;
-let SELECT_OPTION_ARRAY = [];
 
 // コンボボックス追加
 function AddcomboBox(){
@@ -44,26 +43,25 @@ function addOption(id){
     let headerList = recordList[0].split(/[,\t]/g);
 
     let option = document.createElement("option");
-    const comboBoxId = document.getElementById(id);
-    if(comboBoxId != 0){
-        const selectComboBox = document.getElementById(id - 1).value;
-        SELECT_OPTION_ARRAY.push(selectComboBox);
-    } 
+    const nextComboBox = document.getElementById(id);
+    let selectOptionArray = new Array();
 
-    // 確認用
-    // alert(comboBoxId.value)
+    for(let j = 0; j < (Number(id - 1)); j++){
+        const comboBox = document.getElementById(j);
+        selectOptionArray.push(comboBox.value);
+    }
     
-    comboBoxId.innerHTML = '';
+    nextComboBox.innerHTML = '';
     option.text = '';
     option.value = '';
-    comboBoxId.appendChild(option);
+    nextComboBox.appendChild(option);
     
     for(let i = 0; i < headerList.length; i++){
-        if(!SELECT_OPTION_ARRAY.includes(i)){
+        if(!selectOptionArray.includes(i)){
             let option = document.createElement('option');
             option.text = headerList[i];
             option.value = i;
-            comboBoxId.appendChild(option);
+            nextComboBox.appendChild(option);
         }
     }
 }
