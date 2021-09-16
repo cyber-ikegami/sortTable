@@ -46,7 +46,7 @@ function addOption(id){
     const nextComboBox = document.getElementById(id);
     let selectOptionArray = new Array();
 
-    for(let j = 0; j < (Number(id - 1)); j++){
+    for(let j = 0; j < id; j++){
         const comboBox = document.getElementById(j);
         selectOptionArray.push(comboBox.value);
     }
@@ -57,7 +57,7 @@ function addOption(id){
     nextComboBox.appendChild(option);
     
     for(let i = 0; i < headerList.length; i++){
-        if(!selectOptionArray.includes(i)){
+        if(!selectOptionArray.includes(String(i))){
             let option = document.createElement('option');
             option.text = headerList[i];
             option.value = i;
