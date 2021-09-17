@@ -93,7 +93,6 @@ function outputResult() {
     const excelDataValue = document.getElementById('excelData').value;
     let recordList = excelDataValue.split(/\n/g);
     
-    // 全部
     let dataList = new Array();
     for(let i = 0; i < recordList.length; i++){
         dataList[i] = recordList[i].split(/[,\t]/g);
@@ -102,7 +101,11 @@ function outputResult() {
     dataList.sort (function(a, b) {
         for(let j = 0; j < SORT_NUM; j++){
             const comboBox = document.getElementById(j).value;
-            return(a[comboBox] - b[comboBox]);
+            if(j != (SORT_NUM - 1)){
+                dataList.sort(a[comboBox] - b[comboBox]);
+            } else {
+                return(a[comboBox] - b[comboBox]);
+            }
         }
     });
 
