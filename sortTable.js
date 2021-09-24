@@ -92,26 +92,28 @@ function outputResult() {
     
     const excelDataValue = document.getElementById('excelData').value;
     let recordList = excelDataValue.split(/\n/g);
-    
+
     let dataList = new Array();
-    for(let i = 0; i < recordList.length; i++){
+    for(let i = 1; i < recordList.length; i++){
         dataList[i] = recordList[i].split(/[,\t]/g);
     }
-
-    dataList.sort (function(a, b) {
-        for(let j = 0; j < SORT_NUM; j++){
-            const comboBox = document.getElementById(j).value;
-            if(j != (SORT_NUM - 1)){
-                dataList.sort(a[comboBox] - b[comboBox]);
-            } else {
-                return(a[comboBox] - b[comboBox]);
-            }
-        }
-    });
-
+    
+    // 並び替え
+    dataList.sort(sortValue);
+    
     let outputValue = '';
-    let val = dataList.join('\n');
+    let val = `${recordList[0]}\n${dataList.join('\n')}`;
     outputValue = val.replace(/,/g, '\t');
-
+    
     resultForm.resultTextArea.value = outputValue;
+}
+
+// 並び替え
+function sortValue(a, b){
+    for(let j = 0; j < SORT_NUM; j++){
+        const comboBox = document.getElementById(j).value;
+        if (a[comboBox] < b[comboBox]) return -1;
+        if (a[comboBox] > b[comboBox]) return 1;
+    }
+    return 0;
 }
